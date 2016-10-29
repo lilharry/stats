@@ -5,5 +5,5 @@ clean:
 	rm *~
 	rm *.o
 
-run:
+run: statTest
 	./stats
