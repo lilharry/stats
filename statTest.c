@@ -7,9 +7,10 @@
 
 void printPerms(int binData){
   int n;
+  
   printf("-");
   for (n = 8; n >= 0; n--){
-    if ((n >> 8) && 1){//get the relevant digit
+    if ((binData >> n) & 1){//get the relevant digit 
       if (n % 3 == 2)
         printf("r");
       if (n % 3 == 1)
@@ -21,14 +22,15 @@ void printPerms(int binData){
       printf("-");
     }
   }
-  printf("\n");
+  
+  printf("\n\n");
 }
 
 int main(){
   struct stat curStats;
-  struct tm st = *localtime(&curStats.st_atime);
+  //struct tm st = *localtime(&curStats.st_atime);
   int err = stat("statTest.c", &curStats);
-  printf("Statted file success: %d\n\n", err);
+  printf("\nStatted file success: %d\n\n", err);
   
   long remSize = curStats.st_size;
   //printf("Filesize: %d\n",curStats.st_size);
@@ -38,7 +40,7 @@ int main(){
   remSize -= megs * (1024 * 1024);
   int kibs = remSize / 1024;
   remSize -= kibs * 1024;
-  printf("Filesize: %d GB, %d MB, %d KB, %d B \n", gigs, megs,kibs, remSize);
+  printf("Filesize: %d GB, %d MB, %d KB, %d B \n\n", gigs, megs,kibs, remSize);
   
   //bitwise & with 0777 - octal 111s, three times
   //printf("Permissions: %o\n", curStats.st_mode & 0777);
